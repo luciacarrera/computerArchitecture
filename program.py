@@ -1,29 +1,54 @@
+# global variable for memory (Bytearray)
+
+### CLASS cache 
+class cache:
+    def init(self, attribute):
+            self.attribute = attribute # placeholder
+
+
+### CLASS cache set
+class cache_set:
+    def init(self, attribute):
+            self.attribute = attribute # placeholder
+
+
+### CLASS cache block
+class cache_block:
+    def init(self, tag, clean, valid):
+            self.tag = tag
+            self.clean = clean # boolean
+            self.valid = valid # boolean
+
+
+
 ### MAIN FUNCTION
 def main():
-    # define simulator parameters
+    ## define simulator parameters
+    # memory size in bits ?
+    memory_size = 64000 # 64K
 
-    # size of memory address in bits
+    # memory address in bits
     memory_address = 16
 
     # size of the cache, in bytes
-    cache_size = 0
+    cache_size = 1024
 
     # size of a cache block, in bytes
-    block_size = 0
+    block_size = 1024
 
-    # associativity of the cache
-    associativity = 4
+    # associativity of the cache (direct-mapped = 1)
+    associativity = 1
 
     # whether the cache is a write-back or write-through cache
     cache_type = "write-back"
 
     # call simulator function
-    simulator(memory_address, cache_size, block_size, associativity, cache_type)
+    simulator(memory_size, memory_address, cache_size, block_size, associativity, cache_type)
 
 
 
 ### FUNCTION that will stablish the cache size, block size, etc
-def simulator(memory_address, cache_size, block_size, associativity, cache_type):
+def simulator(memory_size, memory_address, cache_size, block_size, associativity, cache_type):
     print("here")
 
 
