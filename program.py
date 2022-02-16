@@ -4,6 +4,7 @@
 class cache:
     def init(self, attribute):
             self.attribute = attribute # placeholder
+            #self.blocks[] = blocks[] 
 
 
 ### CLASS cache set
