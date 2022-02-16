@@ -53,6 +53,21 @@ def simulator(memory_size, memory_address, cache_size, block_size, associativity
 
 
 
+### FUNCTION to calculate address mapping, address in integer format
+def mapping(address):
+    # transform to binary
+    binary = format(address, "b")
+
+    # get block offset bits and find  block offset 
+
+    # get index bits and find index
+
+    # get tag bits and find tag
+
+    # get block index ?
+
+
+
 ### FUNCTION that returns the value read from the specified address an
 def read_word(address):
     # check each address for four-bit alignment 
