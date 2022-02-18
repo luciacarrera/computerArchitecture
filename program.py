@@ -51,7 +51,7 @@ def main():
 
     # call simulator function
     myCache = cache()
-    myCache(myCache, memory_size, memory_address, cache_size, block_size, associativity, cache_type)
+    myCache.init(memory_size, memory_address, cache_size, block_size, associativity, cache_type)
 
     mapping (46916)
 
