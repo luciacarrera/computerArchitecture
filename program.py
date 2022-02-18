@@ -1,5 +1,7 @@
 import math
 from operator import index
+
+from torch import le
 # global variable for memory (Bytearray)
 
 ### CLASS Cache
@@ -27,8 +29,8 @@ class Cache:
         index_bits = num_blocks/self.associativity
 
         # bits of tag, tag = address_bits - index_bits - offset_bits
-        tag_bits = self.memory_address - self.index_bits - self.offset_bits
-        return tag_bits, offset_bits, index_bits
+        tag_bits = self.memory_address - index_bits - offset_bits
+        return int(tag_bits), int(index_bits), int(offset_bits)
 
       
     
@@ -71,17 +73,42 @@ def main():
     # call simulator function
     myCache = Cache(memory_size, memory_address, cache_size, block_size, associativity, cache_type)
     myCache.bits()
-
-    #mapping (46916)
-
-
-
+    mapping(myCache, 2000)
+    mapping(myCache,46916)
 
 
 ### FUNCTION to calculate address mapping, address in integer format
-def mapping(address):
+def mapping(cache, address):    
+    # get bits from cache
+    length = cache.memory_address
+    tag_bits, index_bits, offset_bits = cache.bits()
+
+    # transform to binary
+    binary = format(address, "b")
+    # add additional zeroes to string
+    binary= binary.zfill(length)
+
+    # get block offset and transform binary to integer
+    end = length
+    start = length - offset_bits
+    offset = int(binary[start:end],2)
+
+    # get index
+    end = start
+    start = end - index_bits
+    index = int(binary[start:end],2)
+
+    # get tag
+    end = start
+    start = 0
+    tag = int(binary[start:end],2)
+
+    print(tag, index, offset)
+
+def mapping2(address):
     # transform to binary
     binary = bin(address).replace("0b","")
+    
     print(binary)
 
     # get block offset bits and find  block offset
@@ -90,7 +117,6 @@ def mapping(address):
     print(offset)
 
     # get index bits and find index
-
     index = int(binary) % 10000000000
     index = int(index / 1000000)
     index = int(str(index),2)
