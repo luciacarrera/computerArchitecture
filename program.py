@@ -99,7 +99,7 @@ def mapping(cache, address):
     index = int(binary[start:end],2)
 
     # get tag
-    end = start
+    end = tag_bits
     start = 0
     tag = int(binary[start:end],2)
 
