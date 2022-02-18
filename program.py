@@ -1,19 +1,37 @@
+import math
+from operator import index
 # global variable for memory (Bytearray)
 
-### CLASS cache
-class cache():
+### CLASS Cache
+class Cache:
 
-    def init(self, memory_size, memory_address, cache_size, block_size, associativity, cache_type):
+    # function to initialize class instance
+    def __init__(self, memory_size, memory_address, cache_size, block_size, associativity, cache_type):
         self.memory_size = memory_size
         self.memory_address = memory_address
         self.cache_size = cache_size
         self.block_size = block_size
         self.associativity = associativity
         self.cache_type = cache_type
-
-         # placeholder
         # self.blocks[] = blocks[]
+    
+    # function that calculates the bits of each part of the address
+    def bits(self):
+        # bits of block offset is 2^n blocksize, we get k
+        offset_bits = math.log2(self.block_size)
 
+        # bits of block offset is 2^k sets, for that first we calculate number of blocks
+        # num blocks = log2(cache size / block size)
+        num_blocks = math.log2(self.cache_size/self.block_size)
+        # now we calculate number of sets
+        index_bits = num_blocks/self.associativity
+
+        # bits of tag, tag = address_bits - index_bits - offset_bits
+        tag_bits = self.memory_address - self.index_bits - self.offset_bits
+        return tag_bits, offset_bits, index_bits
+
+      
+    
 
 ### CLASS cache set
 class cache_set:
@@ -42,7 +60,7 @@ def main():
     cache_size = 1024
 
     # size of a cache block, in bytes
-    block_size = 1024
+    block_size = 64
 
     # associativity of the cache (direct-mapped = 1)
     associativity = 1
@@ -51,10 +69,10 @@ def main():
     cache_type = "write-back"
 
     # call simulator function
-    myCache = cache()
-    myCache.init(memory_size, memory_address, cache_size, block_size, associativity, cache_type)
+    myCache = Cache(memory_size, memory_address, cache_size, block_size, associativity, cache_type)
+    myCache.bits()
 
-    mapping (46916)
+    #mapping (46916)
 
 
 
@@ -65,8 +83,8 @@ def mapping(address):
     # transform to binary
     binary = bin(address).replace("0b","")
     print(binary)
-    # get block offset bits and find  block offset
 
+    # get block offset bits and find  block offset
     offset  = int(binary) % 100000
     offset = int(str(offset),2)
     print(offset)
