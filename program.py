@@ -2,8 +2,15 @@
 
 ### CLASS cache
 class cache:
-    def init(self, attribute):
-        self.attribute = attribute  # placeholder
+    def init(self, memory_size, memory_address, cache_size, block_size, associativity, cache_type):
+        self.memory_size = memory_size
+        self.memory_address = memory_address
+        self.cache_size = cache_size
+        self.block_size = block_size
+        self.associativity = associativity
+        self.cache_type = cache_type
+
+         # placeholder
         # self.blocks[] = blocks[]
 
 
@@ -43,14 +50,13 @@ def main():
     cache_type = "write-back"
 
     # call simulator function
-    simulator(memory_size, memory_address, cache_size, block_size, associativity, cache_type)
+    myCache = cache()
+    myCache(myCache, memory_size, memory_address, cache_size, block_size, associativity, cache_type)
 
     mapping (46916)
 
 
-### FUNCTION that will stablish the cache size, block size, etc
-def simulator(memory_size, memory_address, cache_size, block_size, associativity, cache_type):
-    print("here")
+
 
 
 ### FUNCTION to calculate address mapping, address in integer format
@@ -101,6 +107,7 @@ def write_word(address, word):
 def process_word():
     print()
 
+    
 
 ### TESTING
 main()
