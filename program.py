@@ -5,6 +5,8 @@ from operator import index
 # global variable for memory (Bytearray)
 
 ### CLASS Cache
+
+
 class Cache:
 
     # function to initialize class instance
@@ -15,12 +17,21 @@ class Cache:
         self.block_size = block_size
         self.associativity = associativity
         self.cache_type = cache_type
-        # self.blocks[] = blocks[]
+        self.blocks = []
         print("Memory size:", memory_size)
         print("Cache size:", cache_size)
         print("Block Size:", block_size)
         print("Associativity:", associativity)
         print("Cache Type:", cache_type, "\n\n")
+        block = []
+        num_blocks = int(cache_size/block_size)
+
+        for i in range(int(block_size/4)):
+            block.append(bytearray(4))
+        for i in range(num_blocks):
+            self.blocks.append(block)
+
+
     # function that calculates the bits of each part of the address
     def bits(self):
         # bits of block offset is 2^n blocksize, we get k
@@ -51,7 +62,7 @@ class cache_block:
         self.tag = tag
         self.clean = clean  # boolean
         self.valid = valid  # boolean
-
+        
 
 ### MAIN FUNCTION
 def main():
@@ -76,9 +87,10 @@ def main():
 
     # call simulator function
     myCache = Cache(memory_size, memory_address, cache_size, block_size, associativity, cache_type)
-    myCache.bits()
+    
+    
     mapping(myCache, 2000)
-    mapping(myCache,46916)
+    mapping(myCache, 46916)
 
 
 ### FUNCTION to calculate address mapping, address in integer format
