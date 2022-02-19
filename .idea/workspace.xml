@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c02d9cb-87a3-4b5f-b4d0-9a6e99e0848b" name="Changes" comment="fixed init">
-      <change beforePath="$PROJECT_DIR$/.idea/codingAssignment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codingAssignment.iml" afterDir="false" />
+    <list default="true" id="9c02d9cb-87a3-4b5f-b4d0-9a6e99e0848b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/program.py" beforeDir="false" afterPath="$PROJECT_DIR$/program.py" afterDir="false" />
     </list>
@@ -77,11 +76,30 @@
       <option name="project" value="LOCAL" />
       <updated>1645037478495</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fixed init">
+      <created>1645210756260</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1645210756260</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="semi-done with the mapping function" />
-    <option name="LAST_COMMIT_MESSAGE" value="semi-done with the mapping function" />
+    <MESSAGE value="fixed init" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed init" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/program.py</url>
+          <line>79</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

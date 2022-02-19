@@ -1,7 +1,7 @@
 import math
 from operator import index
 
-from torch import le
+#from torch import le
 # global variable for memory (Bytearray)
 
 ### CLASS Cache
@@ -16,7 +16,11 @@ class Cache:
         self.associativity = associativity
         self.cache_type = cache_type
         # self.blocks[] = blocks[]
-    
+        print("Memory size:", memory_size)
+        print("Cache size:", cache_size)
+        print("Block Size:", block_size)
+        print("Associativity:", associativity)
+        print("Cache Type:", cache_type, "\n\n")
     # function that calculates the bits of each part of the address
     def bits(self):
         # bits of block offset is 2^n blocksize, we get k
@@ -103,30 +107,29 @@ def mapping(cache, address):
     start = 0
     tag = int(binary[start:end],2)
 
-    print(tag, index, offset)
+    print("Tag:", tag, "; Index:",index, "; Offest:",offset)
 
 def mapping2(address):
     # transform to binary
     binary = bin(address).replace("0b","")
-    
-    print(binary)
+    print("Binary: " + binary)
 
     # get block offset bits and find  block offset
     offset  = int(binary) % 100000
     offset = int(str(offset),2)
-    print(offset)
+    print("Offset: " + offset)
 
     # get index bits and find index
     index = int(binary) % 10000000000
     index = int(index / 1000000)
     index = int(str(index),2)
-    print(index)
+    print("Index: " + index)
 
     # get tag bits and find tag
 
     tag = int(int(binary) / 10000000000)
     tag = int(str(tag),2)
-    print(tag)
+    print("Binary: " + tag)
 
     # get block index ?
 
