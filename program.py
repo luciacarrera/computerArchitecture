@@ -107,7 +107,10 @@ def mapping(cache, address):
     start = 0
     tag = int(binary[start:end],2)
 
-    print("Tag:", tag, "; Index:",index, "; Offest:",offset)
+    range0 = int(format(tag, "b") + format(index, "b") + "000000",2)
+    range1 = int(format(tag, "b") + format(index, "b") + "111111",2)
+    print("Address:",address,"Binary:",binary, "Tag:", tag, "; Index:",index, "; Offest:",offset, "[", range0, "-", range1, "]")
+    return tag, index, offset
 
 def mapping2(address):
     # transform to binary
