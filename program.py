@@ -28,7 +28,7 @@ class Cache:
         for i in range(int(block_size/4)):
             block.append([bytearray(4),-1])
         for i in range(num_blocks):
-            blocks.append(block)
+            blocks.append(block.copy())
         arr = [45,12,3,7]
         blocks[13][4] = [bytearray(arr),45]
 
@@ -158,7 +158,7 @@ def read_word(my_cache, address):
     # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
     tag, index, offset = mapping(my_cache, address)
     word = blocks[index][offset]
-    process_word(word)
+    process_word()
     return word, tag
 
 
