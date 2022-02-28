@@ -1,3 +1,4 @@
+
 import math
 from operator import index
 
@@ -51,13 +52,13 @@ class Cache:
     
 
 ### CLASS cache set
-class cache_set:
+class CacheSet:
     def init(self, attribute):
         self.attribute = attribute  # placeholder
 
 
 ### CLASS cache block
-class cache_block:
+class CacheBlock:
     def init(self, tag, clean, valid):
         self.tag = tag
         self.clean = clean  # boolean
@@ -89,8 +90,8 @@ def main():
     myCache = Cache(memory_size, memory_address, cache_size, block_size, associativity, cache_type)
     
     
-    mapping(myCache, 2000)
-    tag, index, offset = mapping(myCache, 46916)
+    #mapping(myCache, 2000)
+    tag, index, offset = mapping(myCache, 4616)
     word, tag1 = read_word(myCache, 46916)
     if (tag == tag1):
         print("read hit, the word is ", word)
@@ -126,30 +127,6 @@ def mapping(cache, address):
     range1 = int(format(tag, "b") + format(index, "b") + "111111",2)
     print("Address:",address,"Binary:",binary, "Tag:", tag, "; Index:",index, "; Offest:",offset, "[", range0, "-", range1, "]")
     return tag, index, offset
-
-def mapping2(address):
-    # transform to binary
-    binary = bin(address).replace("0b","")
-    print("Binary: " + binary)
-
-    # get block offset bits and find  block offset
-    offset  = int(binary) % 100000
-    offset = int(str(offset),2)
-    print("Offset: " + offset)
-
-    # get index bits and find index
-    index = int(binary) % 10000000000
-    index = int(index / 1000000)
-    index = int(str(index),2)
-    print("Index: " + index)
-
-    # get tag bits and find tag
-
-    tag = int(int(binary) / 10000000000)
-    tag = int(str(tag),2)
-    print("Binary: " + tag)
-
-    # get block index ?
 
 
 ### FUNCTION that returns the value read from the specified address an
