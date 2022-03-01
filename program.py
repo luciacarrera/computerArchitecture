@@ -69,7 +69,7 @@ class CacheBlock:
 def main():
     ## define simulator parameters
     # memory size in bits ?
-    memory_size = 64000  # 64K
+    memory_size = 65536  # 64K
 
     # memory address in bits
     memory_address = 16
