@@ -31,7 +31,7 @@ class Cache:
         for i in range(num_blocks):
             blocks.append(block.copy())
         arr = [45,12,3,7]
-        blocks[13][4] = [bytearray(arr),45]
+        #blocks[13][4] = [bytearray(arr),45]                    #DELETE
 
     # function that calculates the bits of each part of the address
     def bits(self):
@@ -134,8 +134,8 @@ def read_word(my_cache, address):
     # check each address for four-bit alignment
     # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
     tag, index, offset = mapping(my_cache, address)
-    word = blocks[index][offset]
-    process_word()
+    #word = blocks[index][offset]
+    word = process_word(index,offset)
     return word, tag
 
 
@@ -144,12 +144,15 @@ def write_word(address, word):
     # check each address for four-bit alignment
     # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
     word = ""
-    process_word()
+
 
 
 ### FUNCTION that processes read and write as a single underlying function
-def process_word():
-    print()
+def process_word(index,offset):
+    arr, tag = blocks[index][offset]
+    arr = list(arr)
+    word = arr[0] + 256 * (arr[1] + 256 * (arr[2] + 256 * arr[3]))
+    return word
 
     
 
