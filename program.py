@@ -19,12 +19,13 @@ def main():
         print("read miss")'''
 
 class Simulator:
-    def __init__(self, memory_size, cache_size, block_size, associativity, type):
-        self.address_bits = int(math.log2(memory_size))
+    def __init__(self, address_bits, cache_size, block_size, associativity, type):
+        self.address_bits = address_bits
         # create memory
-        self.memory = Memory(memory_size)
+        self.memory = Memory(2 ** address_bits)
         # create cache
         self.cache = Cache(cache_size, block_size, associativity, type)
+
         self.tag_bits, self.index_bits, self.offset_bits = self.calculate_bits()
 
         # prints characteristics
@@ -49,10 +50,10 @@ class Simulator:
     # function that calculates the bits of each part of the address
     def calculate_bits(self):
         # bits of block offset is 2^n blocksize, we get k
-        offset_bits = math.log2(self.cache.num_blocks)
+        offset_bits = int(math.log2(self.cache.block_size))
 
         # now we calculate number of sets
-        index_bits = math.log2(self.cache.num_sets)
+        index_bits = int(math.log2(self.cache.num_sets))
 
         # bits of tag, tag = address_bits - index_bits - offset_bits
         tag_bits = self.address_bits - index_bits - offset_bits

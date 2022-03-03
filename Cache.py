@@ -11,22 +11,18 @@ class Cache:
         self.size = size
         self.block_size = block_size
         self.associativity = associativity
+        # calculates number of blocks, sets
+        self.num_blocks, self.num_sets = self.calculate()
+
+        # creates sets
+        self.create_sets()
 
         # check cache type is correct
         try:
             self.type = self.check_type(cache_type)
         except AssertionError as msg:
             print(msg)
-        else:
-
-            # calculates number of blocks, sets
-            self.num_blocks, self.num_sets = self.calculate()
-
-            '''# calculates all the bits in memory address
-            self.tag_bits, self.index_bits, self.offset_bits = self.bits()'''
-
-            # creates sets
-            self.create_sets()
+       
 
     # function that creates sets
     def create_sets(self):
@@ -53,6 +49,6 @@ class Cache:
     # function that checks cache type
     def check_type(self, cache_type):
         # check if correctly written the type
-        assert cache_type == "write_back" or cache_type == "write_through", 'Error: Cache Type not recognized'
+        assert cache_type == "write-back" or cache_type == "write-through", 'Error: Cache Type not recognized\n'
         return cache_type
 
