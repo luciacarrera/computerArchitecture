@@ -7,7 +7,6 @@ from Cache import Cache
 # global variable for memory (Bytearray)
 block = [[],[]]
 blocks = []
-'''       
 
 ### MAIN FUNCTION
 def main():
@@ -23,7 +22,7 @@ def main():
 
     myCache = Cache(memory_size, address_bits, cache_size, block_size, associativity, cache_type)
     
-    '''
+    
     #mapping(myCache, 2000)
     tag, index, offset = mapping(myCache, 4616)
     word, tag1 = read_word(myCache, 46916)
@@ -86,7 +85,7 @@ def write_word(address, word):
 def process_word():
     print()
 
-    
-
+'''    
 ### TESTING
 main()
+'''

@@ -7,23 +7,31 @@ from Set import CacheSet
 class Cache:
     # function to initialize class instance
     def __init__(self, memory_size, memory_address, cache_size, block_size, associativity, cache_type):
+        # set values to self
         self.memory_size = memory_size
         self.memory_address = memory_address
         self.cache_size = cache_size
         self.block_size = block_size
         self.associativity = associativity
-        self.cache_type = self.check_type(cache_type)
 
-        # calculates number of blocks, sets
-        self.num_blocks, self.num_sets = self.calculate()
+        # check cache type is correct
+        try:
+            self.cache_type = self.check_type(cache_type)
+        except AssertionError as msg:
+            print(msg)
+        else:
 
-        # calculates all the bits
-        self.tag_bits, self.index_bits, self.offset_bits = self.bits()
+            # calculates number of blocks, sets
+            self.num_blocks, self.num_sets = self.calculate()
 
-        # creates sets
-        self.create_sets()
+            # calculates all the bits in memory address
+            self.tag_bits, self.index_bits, self.offset_bits = self.bits()
 
-        self.print_characteristics()
+            # creates sets
+            self.create_sets()
+
+            # prints characteristics
+            self.print_characteristics()
 
 
     # function that creates sets
@@ -66,11 +74,8 @@ class Cache:
     # function that checks cache type
     def check_type(self, cache_type):
         # check if correctly written the type
-        if cache_type != "write_back" or cache_type != "read_back":
-            print("Error")
-            assert False      
-        else:      
-            return cache_type 
+        assert cache_type == "write_back" or cache_type == "read_back", 'Error: Cache Type not recognized'
+        return cache_type
 
     def print_characteristics(self):
         print("Memory size:", self.memory_size)
@@ -80,4 +85,8 @@ class Cache:
         print("Cache Type:", self.cache_type)
         print("Number of Block:", self.num_blocks)
         print("Number of Sets:", self.num_sets)
-        print("\n")
+        print()
+        print("Tag bits: ", self.tag_bits)
+        print("Index bits: ", self.index_bits)
+        print("Offset bits: ", self.offset_bits)
+        print()
