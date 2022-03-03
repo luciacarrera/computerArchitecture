@@ -4,3 +4,4 @@ class CacheBlock:
         self.tag = tag
         self.clean = clean  # boolean
         self.valid = valid  # boolean
+        # bytearray of block size

@@ -63,14 +63,13 @@ class Cache:
         return tag_bits, index_bits, offset_bits
 
 
+    # function that checks cache type
     def check_type(self, cache_type):
-        try:
-            # check if correctly written the type
-            if cache_type != "write_back" or cache_type != "read_back":
-                raise Exception("Date provided can't be in the past")
-        except:
+        # check if correctly written the type
+        if cache_type != "write_back" or cache_type != "read_back":
             print("Error")
-        else:
+            assert False      
+        else:      
             return cache_type 
 
     def print_characteristics(self):

@@ -1,7 +1,7 @@
 from program import Cache
 
-memory_size = 2 ** 16
-address_bits = 16
+memory_size = 2 ** 16 # mine
+address_bits = 16 # mine
 cache_size = 1024
 block_size = 64
 # blocks = 16

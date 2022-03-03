@@ -9,7 +9,7 @@ class CacheSet:
 
     
     # function that creates sets
-    def create_sets(self):
+    def create_blocks(self):
         num_sets = 2 ** self.index_bits
         for i in range(0, num_sets):
-            CacheSet(i)
+            C(i)
