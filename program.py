@@ -2,6 +2,7 @@
 import math
 from operator import index
 from Cache import Cache
+from Memory import Memory
 
 '''#from torch import le
 # global variable for memory (Bytearray)
@@ -10,19 +11,6 @@ blocks = []
 
 ### MAIN FUNCTION
 def main():
-    memory_size = 2 ** 16
-    address_bits = 16
-    cache_size = 1024
-    block_size = 64
-    # blocks = 16
-    # sets = 4
-    associativity = 4
-    # tag length = 8
-    cache_type = "write_back"
-
-    myCache = Cache(memory_size, address_bits, cache_size, block_size, associativity, cache_type)
-    
-    
     #mapping(myCache, 2000)
     tag, index, offset = mapping(myCache, 4616)
     word, tag1 = read_word(myCache, 46916)
@@ -30,6 +18,48 @@ def main():
         print("read hit, the word is ", word)
     else:
         print("read miss")'''
+
+class Simulator:
+    def __init__(self, memory_size, address_bits, cache_size, block_size, associativity, type):
+        self.address_bits = address_bits
+        # create memory
+        self.memory = Memory(memory_size)
+        # create cache
+        self.cache = Cache(cache_size, block_size, associativity, type)
+        self.tag_bits, self.index_bits, self.offset_bits = self.calculate_bits()
+
+        # prints characteristics
+        self.print_characteristics()
+    
+    def print_characteristics(self):
+        print("-----------------------------------------")
+        print("Memory size =", self.memory.size)
+        print("Cache size =", self.cache.size)
+        print("Block size =", self.cache.block_size)
+        print("Associativity =", self.cache.associativity)
+        print("Cache Type =", self.cache.type)
+        print("Number of Blocks =", self.cache.num_blocks)
+        print("Number of Sets =", self.cache.num_sets)
+        print()
+        print("Address length = ", self.address_bits)
+        print("Tag length = ", self.tag_bits)
+        print("Index length = ", self.index_bits)
+        print("Offset length = ", self.offset_bits)
+        print("-----------------------------------------\n")
+
+    # function that calculates the bits of each part of the address
+    def calculate_bits(self):
+        # bits of block offset is 2^n blocksize, we get k
+        offset_bits = math.log2(self.cache.num_blocks)
+
+        # now we calculate number of sets
+        index_bits = math.log2(self.cache.num_sets)
+
+        # bits of tag, tag = address_bits - index_bits - offset_bits
+        tag_bits = self.address_bits - index_bits - offset_bits
+
+        return tag_bits, index_bits, offset_bits
+
 
 ### FUNCTION to calculate address mapping, address in integer format
 def mapping(cache, address):    

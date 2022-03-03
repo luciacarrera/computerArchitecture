@@ -1,4 +1,4 @@
-from program import Cache
+from program import Simulator
 
 memory_size = 2 ** 16 # mine
 address_bits = 14 # mine
@@ -10,4 +10,4 @@ associativity = 4
 # tag length = 8
 cache_type = "write_back"
 
-myCache = Cache(memory_size, address_bits, cache_size, block_size, associativity, cache_type)
+mySimulator = Simulator(memory_size, address_bits, cache_size, block_size, associativity, cache_type)

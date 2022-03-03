@@ -1,6 +1,6 @@
 ## CLASS cache block
 class Memory:
-    def init(self, size):
+    def __init__(self, size):
         self.size = size
-        self.memory = [size]  
+        self.memoryArray = bytearray(size)
     
