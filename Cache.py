@@ -53,6 +53,6 @@ class Cache:
     # function that checks cache type
     def check_type(self, cache_type):
         # check if correctly written the type
-        assert cache_type == "write_back" or cache_type == "read_back", 'Error: Cache Type not recognized'
+        assert cache_type == "write_back" or cache_type == "write_through", 'Error: Cache Type not recognized'
         return cache_type
 

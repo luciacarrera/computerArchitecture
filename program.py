@@ -1,6 +1,5 @@
-
 import math
-from operator import index
+# from operator import index
 from Cache import Cache
 from Memory import Memory
 
@@ -20,8 +19,8 @@ def main():
         print("read miss")'''
 
 class Simulator:
-    def __init__(self, memory_size, address_bits, cache_size, block_size, associativity, type):
-        self.address_bits = address_bits
+    def __init__(self, memory_size, cache_size, block_size, associativity, type):
+        self.address_bits = int(math.log2(memory_size))
         # create memory
         self.memory = Memory(memory_size)
         # create cache
@@ -60,7 +59,7 @@ class Simulator:
 
         return tag_bits, index_bits, offset_bits
 
-
+'''
 ### FUNCTION to calculate address mapping, address in integer format
 def mapping(cache, address):    
     # get bits from cache
@@ -115,7 +114,7 @@ def write_word(address, word):
 def process_word():
     print()
 
-'''    
+    
 ### TESTING
 main()
 '''
