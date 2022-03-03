@@ -1,0 +1,64 @@
+-----------------------------------------
+cache size = 1024
+block size = 64
+#blocks = 16
+#sets = 8
+associativity = 2
+tag length = 7
+write through
+-----------------------------------------
+
+read miss [addr=0 index=0 block_index=0 tag=0: word=0 (0 - 63]
+[ -1 0 ]
+address = 0 0000000000000000; word = 0
+
+read miss [addr=13432 index=1 block_index=0 tag=26: word=13432 (13376 - 13439]
+[ -1 26 ]
+address = 13432 0011010001111000; word = 13432
+
+read hit [addr=13388 index=1 block_index=0 tag=26: word=13388 (13376 - 13439]
+[ -1 26 ]
+address = 13388 0011010001001100; word = 13388
+
+read miss [addr=62540 index=1 block_index=1 tag=122: word=62540 (62528 - 62591]
+[ 26 122 ]
+address = 62540 1111010001001100; word = 62540
+
+read hit [addr=4 index=0 block_index=0 tag=0: word=4 (0 - 63]
+[ -1 0 ]
+address = 4 0000000000000100; word = 4
+
+read miss + replace [addr=16452 index=1 tag=32 word=16452 (16448 - 16511]
+evict tag 26 in block_index 0
+read in (16448 - 16511)
+[ 122 32 ]
+address = 16452 0100000001000100; word = 16452
+
+read miss [addr=32900 index=2 block_index=0 tag=64: word=32900 (32896 - 32959]
+[ -1 64 ]
+address = 32900 1000000010000100; word = 32900
+
+read miss [addr=49348 index=3 block_index=0 tag=96: word=49348 (49344 - 49407]
+[ -1 96 ]
+address = 49348 1100000011000100; word = 49348
+
+read miss [addr=260 index=4 block_index=0 tag=0: word=260 (256 - 319]
+[ -1 0 ]
+address = 260 0000000100000100; word = 260
+
+read miss [addr=16708 index=5 block_index=0 tag=32: word=16708 (16704 - 16767]
+[ -1 32 ]
+address = 16708 0100000101000100; word = 16708
+
+read miss [addr=33156 index=6 block_index=0 tag=64: word=33156 (33152 - 33215]
+[ -1 64 ]
+address = 33156 1000000110000100; word = 33156
+
+read miss [addr=49604 index=7 block_index=0 tag=96: word=49604 (49600 - 49663]
+[ -1 96 ]
+address = 49604 1100000111000100; word = 49604
+
+read miss [addr=516 index=0 block_index=1 tag=1: word=516 (512 - 575]
+[ 0 1 ]
+address = 516 0000001000000100; word = 516
+

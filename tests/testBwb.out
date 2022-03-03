@@ -1,0 +1,44 @@
+-----------------------------------------
+cache size = 1024
+block size = 64
+#blocks = 16
+#sets = 16
+associativity = 1
+tag length = 6
+write back
+-----------------------------------------
+
+read miss [addr=46916 index=13 block_index=0 tag=45: word=46916 (46912 - 46975]
+[ 45 ]
+address = 46916 1011011101000100; word = 46916
+
+read hit [addr=46932 index=13 block_index=0 tag=45: word=46932 (46912 - 46975]
+[ 45 ]
+address = 46932 1011011101010100; word = 46932
+
+read miss [addr=12936 index=10 block_index=0 tag=12: word=12936 (12928 - 12991]
+[ 12 ]
+address = 12936 0011001010001000; word = 12936
+
+read miss + replace [addr=13964 index=10 tag=13 word=13964 (13952 - 14015]
+evict tag 12 in block_index 0
+read in (13952 - 14015)
+[ 13 ]
+address = 13964 0011011010001100; word = 13964
+
+write 40 to address 46956 1011011101101100
+write hit [addr=46956 index=13 block_index=0 tag=45: word=40 (46912 - 46975)
+[ 45 ]
+
+now read that same word: should be 40
+read hit [addr=46956 index=13 block_index=0 tag=45: word=40 (46912 - 46975]
+[ 45 ]
+address = 46956 1011011101101100; word = 40
+
+read miss + replace [addr=56132 index=13 tag=54 word=56132 (56128 - 56191]
+evict tag 45 in block_index 0
+write back (46912 - 46975)
+read in (56128 - 56191)
+[ 54 ]
+address = 56132 1101101101000100; word = 56132
+
