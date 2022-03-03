@@ -1,0 +1,131 @@
+-----------------------------------------
+cache size = 1024
+block size = 64
+#blocks = 16
+#sets = 4
+associativity = 4
+tag length = 8
+write back
+-----------------------------------------
+
+several addresses that map to the same set
+
+read miss [addr=1152 index=2 block_index=0 tag=4: word=1152 (1152 - 1215]
+[ -1 -1 -1 4 ]
+address = 1152; word = 1152
+
+read miss [addr=2176 index=2 block_index=1 tag=8: word=2176 (2176 - 2239]
+[ -1 -1 4 8 ]
+address = 2176; word = 2176
+
+read miss [addr=3200 index=2 block_index=2 tag=12: word=3200 (3200 - 3263]
+[ -1 4 8 12 ]
+address = 3200; word = 3200
+
+read miss [addr=4224 index=2 block_index=3 tag=16: word=4224 (4224 - 4287]
+[ 4 8 12 16 ]
+address = 4224; word = 4224
+
+read miss + replace [addr=5248 index=2 tag=20 word=5248 (5248 - 5311]
+evict tag 4 in block_index 0
+read in (5248 - 5311)
+[ 8 12 16 20 ]
+address = 5248; word = 5248
+
+read miss + replace [addr=7296 index=2 tag=28 word=7296 (7296 - 7359]
+evict tag 8 in block_index 1
+read in (7296 - 7359)
+[ 12 16 20 28 ]
+address = 7296; word = 7296
+
+read hit [addr=4224 index=2 block_index=3 tag=16: word=4224 (4224 - 4287]
+[ 12 20 28 16 ]
+address = 4224; word = 4224
+
+read hit [addr=3200 index=2 block_index=2 tag=12: word=3200 (3200 - 3263]
+[ 20 28 16 12 ]
+address = 3200; word = 3200
+
+write 17 to memory address 7312; should be a write hit
+write hit [addr=7312 index=2 block_index=1 tag=28: word=17 (7296 - 7359)
+[ 20 16 12 28 ]
+
+now several reads; all should be a read hit
+
+read hit [addr=7320 index=2 block_index=1 tag=28: word=7320 (7296 - 7359]
+[ 20 16 12 28 ]
+address = 7320; word = 7320
+
+read hit [addr=4228 index=2 block_index=3 tag=16: word=4228 (4224 - 4287]
+[ 20 12 28 16 ]
+address = 4228; word = 4228
+
+read hit [addr=3212 index=2 block_index=2 tag=12: word=3212 (3200 - 3263]
+[ 20 28 16 12 ]
+address = 3212; word = 3212
+
+write 5 to address 5248: should be a write hit
+write hit [addr=5248 index=2 block_index=0 tag=20: word=5 (5248 - 5311)
+[ 28 16 12 20 ]
+
+now read the value: should be a read hit
+read hit [addr=5248 index=2 block_index=0 tag=20: word=5 (5248 - 5311]
+[ 28 16 12 20 ]
+address = 5248; word = 5
+
+write 7 to address 8320: should be a write miss
+write miss + replace [addr=8320 index=2 tag=32 word=7 (8320 - 8383]
+evict tag 28 in block_index 1
+write back (7296 - 7359)
+read in (8320 - 8383)
+[ 16 12 20 32 ]
+
+read hit [addr=8324 index=2 block_index=1 tag=32: word=8324 (8320 - 8383]
+[ 16 12 20 32 ]
+address = 8324; word = 8324
+
+now flush the blocks in index 2
+
+read miss + replace [addr=9344 index=2 tag=36 word=9344 (9344 - 9407]
+evict tag 16 in block_index 3
+read in (9344 - 9407)
+[ 12 20 32 36 ]
+address = 9344; word = 9344
+
+read miss + replace [addr=11392 index=2 tag=44 word=11392 (11392 - 11455]
+evict tag 12 in block_index 2
+read in (11392 - 11455)
+[ 20 32 36 44 ]
+address = 11392; word = 11392
+
+read miss + replace [addr=16512 index=2 tag=64 word=16512 (16512 - 16575]
+evict tag 20 in block_index 0
+write back (5248 - 5311)
+read in (16512 - 16575)
+[ 32 36 44 64 ]
+address = 16512; word = 16512
+
+read miss + replace [addr=17536 index=2 tag=68 word=17536 (17536 - 17599]
+evict tag 32 in block_index 1
+write back (8320 - 8383)
+read in (17536 - 17599)
+[ 36 44 64 68 ]
+address = 17536; word = 17536
+
+now read the value at 8320: should be 7
+read miss + replace [addr=8320 index=2 tag=32 word=7 (8320 - 8383]
+evict tag 36 in block_index 3
+read in (8320 - 8383)
+[ 44 64 68 32 ]
+address = 8320; word = 7
+
+now read the value at 17536: should be a read hit
+read hit [addr=17536 index=2 block_index=1 tag=68: word=17536 (17536 - 17599]
+[ 44 64 32 68 ]
+address = 17536; word = 17536
+
+now read the value at 17532: should be a read miss
+read miss [addr=17532 index=1 block_index=0 tag=68: word=17532 (17472 - 17535]
+[ -1 -1 -1 68 ]
+address = 17532; word = 17532
+
