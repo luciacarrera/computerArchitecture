@@ -53,17 +53,17 @@ class Cache:
 
     # function that calculates number of sets, blocks, etc
     def calculate(self):
-        num_blocks = int(math.log2(self.cache_size/self.block_size))
+        num_blocks = int(self.cache_size/self.block_size)
         num_sets = int(num_blocks/self.associativity)
         return num_blocks, num_sets
 
     # function that calculates the bits of each part of the address
     def bits(self):
         # bits of block offset is 2^n blocksize, we get k
-        offset_bits = math.log2(self.block_size)
+        offset_bits = math.log2(self.num_blocks)
 
         # now we calculate number of sets
-        index_bits = self.num_blocks/self.associativity
+        index_bits = math.log2(self.num_sets)
 
         # bits of tag, tag = address_bits - index_bits - offset_bits
         tag_bits = self.memory_address - index_bits - offset_bits
@@ -78,15 +78,18 @@ class Cache:
         return cache_type
 
     def print_characteristics(self):
-        print("Memory size:", self.memory_size)
-        print("Cache size:", self.cache_size)
-        print("Block Size:", self.block_size)
-        print("Associativity:", self.associativity)
-        print("Cache Type:", self.cache_type)
-        print("Number of Block:", self.num_blocks)
-        print("Number of Sets:", self.num_sets)
+        print("-----------------------------------------")
+        print("Memory size =", self.memory_size)
+        print("Cache size =", self.cache_size)
+        print("Block size =", self.block_size)
+        print("Associativity =", self.associativity)
+        print("Cache Type =", self.cache_type)
+        print("Number of Blocks =", self.num_blocks)
+        print("Number of Sets =", self.num_sets)
         print()
-        print("Tag bits: ", self.tag_bits)
-        print("Index bits: ", self.index_bits)
-        print("Offset bits: ", self.offset_bits)
-        print()
+        print("Address length = ", self.memory_address)
+        print("Tag length = ", self.tag_bits)
+        print("Index length = ", self.index_bits)
+        print("Offset length = ", self.offset_bits)
+        print("-----------------------------------------\n")
+
