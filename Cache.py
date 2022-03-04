@@ -7,7 +7,6 @@ class Cache:
     # function to initialize class instance
     def __init__(self, size, block_size, associativity, cache_type):
         # set values to self
-        #self.address_bits = address_bits
         self.size = size
         self.block_size = block_size
         self.associativity = associativity

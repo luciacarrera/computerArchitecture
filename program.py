@@ -17,9 +17,12 @@ def main():
 
 class Simulator:
     def __init__(self, address_bits, cache_size, block_size, associativity, type):
+
         self.address_bits = address_bits
+
         # create memory
         self.memory = Memory(2 ** address_bits)
+
         # create cache
         self.cache = Cache(cache_size, block_size, associativity, type)
 
@@ -61,10 +64,13 @@ class Simulator:
     def read_word(self, word):
         # first map address 
         address = mapping(self, word)
+
         # check each address for four-bit alignment
         assert self.is_aligned(word) == False, 'Error: this address is not aligned in a four byte boundary'
+
         # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
-        pass
+
+        # read word
     
     # to check if word aligned in a four bit boundary
     def is_aligned(self, address):

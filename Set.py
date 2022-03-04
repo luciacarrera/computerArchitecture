@@ -7,11 +7,11 @@ class CacheSet:
         self.index = index 
         self.associativity = associativity
         self.block_size = block_size
+        self.tag_queue = [] # TODO
 
         # creates the blocks
         self.create_blocks()
-        
-
+    
     
     # function that creates sets
     def create_blocks(self):
