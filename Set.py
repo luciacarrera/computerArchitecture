@@ -7,7 +7,7 @@ class CacheSet:
         self.index = index 
         self.associativity = associativity
         self.block_size = block_size
-        self.tag_queue = [] # TODO
+        self.tag_queue = [-1] * associativity # TODO
 
         # creates the blocks
         self.create_blocks()

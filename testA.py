@@ -10,3 +10,4 @@ associativity = 4
 cache_type = "write-back"
 
 mySimulator = Simulator(memory_address_size, cache_size, block_size, associativity, cache_type)
+mySimulator.read_word(13385)

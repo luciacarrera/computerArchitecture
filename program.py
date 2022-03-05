@@ -61,14 +61,15 @@ class Simulator:
         return tag_bits, index_bits, offset_bits
     
     ### FUNCTION that returns the value read from the specified address an
-    def read_word(self, word):
+    def read_word(self,address):
         # first map address 
-        address = mapping(self, word)
+        address = self.mapping(address)
 
         # check each address for four-bit alignment
-        assert self.is_aligned(word) == False, 'Error: this address is not aligned in a four byte boundary'
+        assert self.is_aligned(address) == False, 'Error: this address is not aligned in a four byte boundary'
 
         # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
+        assert (address >= 0 and address <  self.cache_size), 'Error: this address is not in range'
 
         # read word
     
@@ -78,6 +79,50 @@ class Simulator:
             return True
         else:
             return False
+
+    def mapping(self,address):    
+        # get bits from cache
+
+
+        # transform to binary
+        binary = format(address, "b")
+        # add additional zeroes to string
+        binary= binary.zfill(self.address_bits)
+
+        # get block offset and transform binary to integer
+        end = self.address_bits
+        start = self.address_bits - self.offset_bits
+        offset = int(binary[start:end],2)
+
+        # get index
+        end = start
+        start = end - self.index_bits
+        index = int(binary[start:end],2)
+
+        # get tag
+        end = self.tag_bits
+        start = 0
+        tag = int(binary[start:end],2)
+
+        range0 = int(format(tag, "b") + format(index, "b") + "000000",2)
+        range1 = int(format(tag, "b") + format(index, "b") + "111111",2)
+        print("Address:",address,"Binary:",binary, "Tag:", tag, "; Index:",index, "; Offest:",offset, "[", range0, "-", range1, "]")
+        return tag, index, offset
+
+
+
+    def write_word(self,address, word):
+        # check each address for four-bit alignment
+        # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
+        tag, index, offset= self.mapping(address)
+        word_array = 45 + 256 * (12 + 256 * (3 + 256 * 7))
+        word_array = []
+        word_array.append(word // 256)
+
+
+    ### FUNCTION that processes read and write as a single underlying function
+    def process_word():
+        print()
 
 
     '''    ### FUNCTION to calculate address mapping, address in integer format
