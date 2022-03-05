@@ -3,6 +3,7 @@ import math
 from Cache import Cache
 from Memory import Memory
 from Word import Word
+from Set import CacheSet
 
 '''
 ### MAIN FUNCTION
@@ -68,7 +69,8 @@ class Simulator:
         # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
         assert (address >= 0 and address <  self.memory.size), 'Error: this address is not in range'
 
-        self.cache.set_list[myWord.index].read_word(myWord)
+        mySet = self.cache.set_list[myWord.index]
+        print(mySet.read_word(myWord))        #CANT ACCESS THE BLOCK_LIST IN THIS SET 
     '''
 
     def write_word(self,address, word):

@@ -1,4 +1,4 @@
-from numpy import take_along_axis
+#from numpy import take_along_axis
 from Block import CacheBlock
 #from Cache import Cache
 ### CLASS cache set
@@ -52,7 +52,7 @@ class CacheSet:
             self.tag_queue.append(word.tag)
 
             # put in blocks
-            self.block_list[self.block_index]
+            self.block_list[self.block_index] = word
 
 
         
