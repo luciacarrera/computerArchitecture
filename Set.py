@@ -49,6 +49,9 @@ class CacheSet:
         if self.block_index == self.associativity:
             self.block_index = 0
 
+        ## ADD TO BLOCK
+
+        
         "// addr=",word.address,"index=", word.index, "tag=",word.tag, word.range
         ## PRINT RESULTS
         myStr = "read "
