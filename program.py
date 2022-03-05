@@ -70,7 +70,7 @@ class Simulator:
         assert (address >= 0 and address <  self.memory.size), 'Error: this address is not in range'
 
         mySet = self.cache.set_list[myWord.index]
-        print(mySet.read_word(myWord))        #CANT ACCESS THE BLOCK_LIST IN THIS SET 
+        mySet.read_word(myWord)  #CANT ACCESS THE BLOCK_LIST IN THIS SET 
     '''
 
     def write_word(self,address, word):
