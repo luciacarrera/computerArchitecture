@@ -10,10 +10,10 @@ class Cache:
         self.size = size
         self.block_size = block_size
         self.associativity = associativity
+
         # calculates number of blocks, sets
         self.num_blocks, self.num_sets = self.calculate()
         self.set_list = []
-
 
         # creates sets
         self.create_sets()

@@ -2,9 +2,9 @@ import math
 # from operator import index
 from Cache import Cache
 from Memory import Memory
+from Word import Word
 
 '''
-
 ### MAIN FUNCTION
 def main():
     #mapping(myCache, 2000)
@@ -59,52 +59,17 @@ class Simulator:
         tag_bits = self.address_bits - index_bits - offset_bits
 
         return tag_bits, index_bits, offset_bits
-    
+
     ### FUNCTION that returns the value read from the specified address an
     def read_word(self,address):
         # first map address 
-        tag,index,offset = self.mapping(address)
-
-        # check each address for four-bit alignment
-        #assert self.is_aligned(address) == False, 'Error: this address is not aligned in a four byte boundary'
+        myWord = Word(address, self.address_bits, self.tag_bits, self.index_bits, self.offset_bits)
 
         # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
         assert (address >= 0 and address <  self.memory.size), 'Error: this address is not in range'
 
-        # read word
-        word = self.cache.set_list[index]
-        
-
-    def mapping(self,address):    
-        # get bits from cache
-
-
-        # transform to binary
-        binary = format(address, "b")
-        # add additional zeroes to string
-        binary= binary.zfill(self.address_bits)
-
-        # get block offset and transform binary to integer
-        end = self.address_bits
-        start = self.address_bits - self.offset_bits
-        offset = int(binary[start:end],2)
-
-        # get index
-        end = start
-        start = end - self.index_bits
-        index = int(binary[start:end],2)
-
-        # get tag
-        end = self.tag_bits
-        start = 0
-        tag = int(binary[start:end],2)
-
-        range0 = int(format(tag, "b") + format(index, "b") + "000000",2)
-        range1 = int(format(tag, "b") + format(index, "b") + "111111",2)
-        print("Address:",address,"Binary:",binary, "Tag:", tag, "; Index:",index, "; Offest:",offset, "[", range0, "-", range1, "]")
-        return tag, index, offset
-
-
+        self.cache.set_list[myWord.index].read_word(myWord)
+    '''
 
     def write_word(self,address, word):
         # check each address for four-bit alignment
@@ -118,7 +83,7 @@ class Simulator:
     ### FUNCTION that processes read and write as a single underlying function
     def process_word():
         print()
-
+    '''
 
     '''    ### FUNCTION to calculate address mapping, address in integer format
     def mapping(cache, address):    
