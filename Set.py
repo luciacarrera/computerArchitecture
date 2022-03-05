@@ -8,6 +8,7 @@ class CacheSet:
         self.associativity = associativity
         self.block_size = block_size
         self.tag_queue = [-1] * associativity # TODO
+        self.block_list = []
 
         # creates the blocks
         self.create_blocks()
@@ -15,6 +16,5 @@ class CacheSet:
     
     # function that creates sets
     def create_blocks(self):
-        block_list = {}
         for i in range(0, self.associativity):
-            block_list[i] = CacheBlock(i, self.block_size)
+            self.block_list.append(CacheBlock(i, self.block_size))

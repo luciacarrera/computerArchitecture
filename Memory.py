@@ -7,5 +7,5 @@ class Memory:
         self.size = size
         self.memoryArray = []
         for i in range (size):
-            rand_int = rand.randint(0, 256)
-            self.memoryArray.append(bytearray(rand_int))
+            rand_int = rand.randint(0,2147483647)
+            self.memoryArray.append((rand_int).to_bytes(4, byteorder='little'))

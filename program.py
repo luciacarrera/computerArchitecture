@@ -63,22 +63,17 @@ class Simulator:
     ### FUNCTION that returns the value read from the specified address an
     def read_word(self,address):
         # first map address 
-        address = self.mapping(address)
+        tag,index,offset = self.mapping(address)
 
         # check each address for four-bit alignment
-        assert self.is_aligned(address) == False, 'Error: this address is not aligned in a four byte boundary'
+        #assert self.is_aligned(address) == False, 'Error: this address is not aligned in a four byte boundary'
 
         # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
-        assert (address >= 0 and address <  self.cache_size), 'Error: this address is not in range'
+        assert (address >= 0 and address <  self.memory.size), 'Error: this address is not in range'
 
         # read word
-    
-    # to check if word aligned in a four bit boundary
-    def is_aligned(self, address):
-        if (address & 0x3) == 0 :
-            return True
-        else:
-            return False
+        word = self.cache.set_list[index]
+        
 
     def mapping(self,address):    
         # get bits from cache
@@ -178,7 +173,14 @@ class Simulator:
     ### FUNCTION that processes read and write as a single underlying function
     def process_word():
         print()
+    
 
+    # to check if word aligned in a four bit boundary
+    def is_aligned(self, address):
+        if (address & 0x3) == 0 :
+            return True
+        else:
+            return False
         
     ### TESTING
     main()

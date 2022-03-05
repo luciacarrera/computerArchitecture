@@ -12,6 +12,8 @@ class Cache:
         self.associativity = associativity
         # calculates number of blocks, sets
         self.num_blocks, self.num_sets = self.calculate()
+        self.set_list = []
+
 
         # creates sets
         self.create_sets()
@@ -25,9 +27,8 @@ class Cache:
 
     # function that creates sets
     def create_sets(self):
-        set_list = {}
         for i in range(0, self.num_sets):
-            set_list[i] = CacheSet(i, self.associativity, self.block_size)
+            self.set_list.append(CacheSet(i, self.associativity, self.block_size))
 
         
     '''
