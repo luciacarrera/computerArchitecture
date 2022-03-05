@@ -11,7 +11,6 @@ class CacheSet:
         self.tag_queue = [-1] * associativity # TODO
         print(self.tag_queue)
         self.block_list = []
-        self.block_index = -1
 
         # creates the blocks
         self.create_blocks()
@@ -23,6 +22,13 @@ class CacheSet:
     
     # function that adds the word
     def read_word(self, word):
+
+        # set the block index
+        self.block_index += 1
+        if self.block_index == self.associativity:
+            self.block_index = 0
+
+        # variables to use to check status of cache
         hit = False
         replace = False
 
@@ -33,6 +39,7 @@ class CacheSet:
                 temp = self.tag_queue.pop(0)
                 self.tag_queue.append(temp)
         
+        # if couldn't find in cache then fetch from memory
         if hit == False:
             # pop first value
             popped_tag = self.tag_queue.pop(0)
@@ -43,15 +50,16 @@ class CacheSet:
 
             # append word
             self.tag_queue.append(word.tag)
+
+            # put in blocks
+            self.block_list[self.block_index]
+
+
         
-        # set the block index
-        self.block_index += 1
-        if self.block_index == self.associativity:
-            self.block_index = 0
 
         ## ADD TO BLOCK
 
-        
+        '''
         "// addr=",word.address,"index=", word.index, "tag=",word.tag, word.range
         ## PRINT RESULTS
         myStr = "read "
@@ -61,4 +69,4 @@ class CacheSet:
             myStr += "miss"
 
         print(self.tag_queue)
-        print(self.block_index)
+        print(self.block_index)'''

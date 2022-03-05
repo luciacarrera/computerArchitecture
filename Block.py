@@ -9,3 +9,6 @@ class CacheBlock:
         self.clean = clean  # boolean
         self.valid = valid  # boolean
         # bytearray of block size'''
+
+    def add_word(self, word):
+        pass
