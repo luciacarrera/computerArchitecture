@@ -11,7 +11,7 @@ class CacheSet:
         self.tag_queue = [-1] * associativity # TODO
         print(self.tag_queue)
         self.block_list = []
-
+        self.block_index = -1
         # creates the blocks
         self.create_blocks()
     
@@ -53,6 +53,7 @@ class CacheSet:
 
             # put in blocks
             self.block_list[self.block_index] = word
+            print(self.tag_queue)
 
 
         
