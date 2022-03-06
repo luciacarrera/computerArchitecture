@@ -65,13 +65,33 @@ class Simulator:
     def read_word(self,address):
         # first map address 
         myWord = Word(address, self.address_bits, self.tag_bits, self.index_bits, self.offset_bits)
-
+        
         # check for range 0 ≤ address < memSize, where memSize is the number of bytes in the memory.
         assert (address >= 0 and address <  self.memory.size), 'Error: this address is not in range'
 
         mySet = self.cache.set_list[myWord.index]
-        mySet.read_word(myWord)  #CANT ACCESS THE BLOCK_LIST IN THIS SET 
-    '''
+        hit = mySet.read_word(myWord)
+        if not hit:
+            self.cache.set_list[myWord.index].block_list[self.cache.set_list[myWord.index].block_index] = address.to_bytes(4, byteorder='little')
+        print("Address = ", address)
+        print("Word = ",int.from_bytes(self.cache.set_list[myWord.index].block_list[self.cache.set_list[myWord.index].block_index], "little"))
+        print("")
+
+
+
+
+
+'''     
+        if hit == False:
+            word = self.memory.memoryArray[address]
+            self.cache.set_list.block_list
+
+
+
+
+
+#        word = mySet.read_word(myWord)  #CANT ACCESS THE BLOCK_LIST IN THIS SET 
+    
 
     def write_word(self,address, word):
         # check each address for four-bit alignment
@@ -85,9 +105,9 @@ class Simulator:
     ### FUNCTION that processes read and write as a single underlying function
     def process_word():
         print()
-    '''
+    
 
-    '''    ### FUNCTION to calculate address mapping, address in integer format
+   ### FUNCTION to calculate address mapping, address in integer format
     def mapping(cache, address):    
         # get bits from cache
         length = cache.memory_address

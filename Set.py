@@ -54,6 +54,7 @@ class CacheSet:
             # put in blocks
             self.block_list[self.block_index] = word
             print(self.tag_queue)
+        return hit
 
 
         
