@@ -91,9 +91,12 @@ class Simulator:
             print("write miss")
         else:
             print("write hit")
+        if self.cache.type == "write-through":
+            self.memory.memoryArray[address] = word.to_bytes(4, byteorder='little')
         self.cache.set_list[myWord.index].block_list[self.cache.set_list[myWord.index].block_index] = word.to_bytes(4, byteorder='little')
         print("Address = ", address)
         print("Word = ",int.from_bytes(self.cache.set_list[myWord.index].block_list[self.cache.set_list[myWord.index].block_index], "little"))
+        print("Range = ", myWord.range)
         print("")
 
 
